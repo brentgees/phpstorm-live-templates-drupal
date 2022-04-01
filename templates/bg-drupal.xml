@@ -1,0 +1,205 @@
+<templateSet group="Drupal">
+  <template name="db_select" value="$query = \Drupal::database()-&gt;select('field_name', 'alias');&#10;$query-&gt;fields('alias', ['field_1', 'field_2']);&#10;$result = $query-&gt;execute()-&gt;fetchAll();" description="database select" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="dblog" value="\Drupal::messenger()-&gt;addError($e-&gt;getMessage());" description="Log to watchdog" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="load_service" value="/** @var \Drupal\ $service */&#10;$service = \Drupal::service('service.name');" description="Load service" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="entity_view" value="$view_builder = \Drupal::entityTypeManager()-&gt;getViewBuilder($entity-&gt;getEntityTypeId());&#10;$entityView = $view_builder-&gt;view($entity, 'teaser');" description="Entity view" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="entity_load" value="\Drupal::entityTypeManager()-&gt;getStorage('node')-&gt;load($id);&#10;&#10;" description="Loads drupal entity" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="drupal_set_message" value="\Drupal::messenger()-&gt;addMessage('message');" description="Set message" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="db_select_2" value="$query = \Drupal::entityQuery('node')&#10;    -&gt;condition('status', 1)&#10;    -&gt;condition('changed', REQUEST_TIME, '&lt;')&#10;    -&gt;condition('title', 'cat', 'CONTAINS')&#10;    -&gt;condition('field_tags.entity.name', 'cats');&#10;&#10;$nids = $query-&gt;execute();" description="entityQuery" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_attr" value="'#attributes' =&gt; ['class' =&gt; ['$CLASS$']]," description="" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="class" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_html" value="[&#10;  '#type' =&gt; 'html_tag',&#10;  '#tag' =&gt; '$TAG$',&#10;  '#value' =&gt; $VALUE$,&#10;]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="TAG" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_markup" value="[&#10;  '#type' =&gt; 'markup',&#10;  '#markup' =&gt; $MARKUP$,&#10; ]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="MARKUP" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_link" value="[&#10;  '#type' =&gt; 'link',&#10;  '#title' =&gt; $this-&gt;t('$TITLE$'),&#10;  '#url' =&gt; Url::fromRoute('$ROUTE$', []),&#10;  '#attributes' =&gt; [&#10;    'class' =&gt; ['$CLASS$'],&#10;  ],&#10;]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="TITLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ROUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_links" value="[&#10;  '#theme' =&gt; 'links',&#10;  '#links' =&gt; [&#10;    [&#10;      'title' =&gt; $this-&gt;t('$TITLE$'),&#10;      'url' =&gt; Url::fromRoute('$ROUTE$', []),&#10;      'attributes' =&gt; ['class' =&gt; ['$CLASS$']],&#10;    ],&#10;  ],&#10;]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="TITLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ROUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="h_theme" value="/**&#10; * Implements hook_theme().&#10; */&#10;function $MODULE$_theme() {&#10;  return [&#10;    '$THEME$' =&gt; [&#10;      'variables' =&gt; [&#10;        '$VARIABLE$' =&gt; NULL,&#10;      ],&#10;    ],&#10;  ];&#10;}" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="MODULE" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="THEME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VARIABLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_container" value="[&#10;  '#type' =&gt; 'container',&#10;  '#attributes' =&gt; ['class' =&gt; ['$CLASS$']],&#10;  '#children' =&gt; [&#10;    $CHILDREN$&#10;  ],&#10;]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CHILDREN" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_select" value="[&#10;  '#type' =&gt; 'select',&#10;  '#title' =&gt; $this-&gt;t('$LABEL$'),&#10;  '#options' =&gt; [&#10;    '$KEY$' =&gt; $this-&gt;t('$OPTION$'),&#10;  ],&#10;]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="LABEL" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="h_page_att" value="/**&#10; * Implements hook_page_attachments_alter().&#10; */&#10;function $MODULE$_page_attachments_alter(array &amp;$attachments) {&#10;  &#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="MODULE" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_ds" value="namespace Drupal\$MODULE_NAME$\Plugin\DsField;&#10;&#10;use Drupal\ds\Plugin\DsField\DsFieldBase;&#10;use Symfony\Component\DependencyInjection\ContainerInterface;&#10;&#10;/**&#10; * Plugin that renders the $DESCRIPTION$.&#10; *&#10;* @DsField(&#10; *   id = &quot;$FIELDID$&quot;,&#10; *   title = @Translation(&quot;$TITLE$&quot;),&#10; *   entity_type = &quot;$ENTITY_TYPE$&quot;,&#10; *   provider = &quot;$MODULE_NAME$&quot;&#10; * )&#10; */&#10;class $CLASSNAME$ extends DsFieldBase {&#10;&#10;  /**&#10;   * {@inheritdoc}&#10;   */&#10;  public function __construct(array $configuration, $plugin_id, $plugin_definition) {&#10;    parent::__construct($configuration, $plugin_id, $plugin_definition);&#10;  }&#10;&#10;  /**&#10;   * {@inheritdoc}&#10;   */&#10;  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {&#10;    return new static(&#10;      $configuration,&#10;      $plugin_id,&#10;      $plugin_definition,&#10;      $container-&gt;get('entity_type.manager')&#10;    );&#10;  }&#10;&#10;  /**&#10;   * {@inheritdoc}&#10;   */&#10;  public function build() {&#10;  &#10;  }&#10;&#10;}&#10;" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="MODULE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DESCRIPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELDID" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TITLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ENTITY_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASSNAME" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_list" value="[&#10;  '#theme' =&gt; 'item_list',&#10;  '#items' =&gt; [&#10;    $ITEMS$,&#10;  ],&#10;]" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="ITEMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="entity_query" value="$query = $this-&gt;entityTypeManager-&gt;getStorage('$ENTITY_TYPE$')-&gt;getQuery()&#10;  -&gt;condition('status', 1)&#10;  -&gt;sort('changed', 'DESC')&#10;  -&gt;range(0, 1)&#10;  -&gt;accessCheck(FALSE)&#10;  -&gt;execute();" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="ENTITY_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="t_inline_template" value="[&#10;  '#type' =&gt; 'inline_template',&#10;  '#template' =&gt; '$TEMPLATE$',&#10;  '#context' =&gt; [&#10;    'name' =&gt; $VRIABLE$,&#10;  ],&#10;];" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TEMPLATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VRIABLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="sql_query" value="$connection = \Drupal::database();&#10;$query = $connection-&gt;select('$TABLE$', '$ALIAS$');&#10;$query-&gt;join('$JOIN_TABLE$', '$JOIN_ALIAS$', '$ALIAS$.$TABLE_FIELD$ = $JOIN_ALIAS$.$JOIN_FIELD$');&#10;$query-&gt;condition('$ALIAS$.$CONDITION_FIELD$', $CONDITION_VALUE$);&#10;$query-&gt;fields('$ALIAS$', ['$FIELD$']);&#10;$query-&gt;orderBy('$ALIAS$.$ORDER_FIELD$', 'DESC');&#10;$query-&gt;range($RANGE_START$, $RANGE_END$);&#10;$results = $query-&gt;execute()-&gt;fetchAll();" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TABLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ALIAS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="JOIN_TABLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="JOIN_ALIAS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TABLE_FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="JOIN_FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONDITION_FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONDITION_VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ORDER_FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="RANGE_START" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="RANGE_END" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="term_create" value="$term = Term::create([&#10;  'vid' =&gt; 'vocabulary_name',&#10;  'langcode' =&gt; 'en',&#10;  'name' =&gt; 'INSERT_TAGNAME',&#10;  'description' =&gt; [&#10;    'value' =&gt; '&lt;p&gt;My description.&lt;/p&gt;',&#10;    'format' =&gt; 'full_html',&#10;  ],&#10;  'weight' =&gt; -1,&#10;  'parent' =&gt; array (0),&#10;]);&#10;$term-&gt;save();" description="Creates a taxonomy term" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="load_class" value="\Drupal::classResolver()&#10;    -&gt;getInstanceFromDefinition(ClassName::class)&#10;    -&gt;info();" description="Loads a class" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="extra_field" value="/**&#10; * Implements hook_entity_extra_field_info().&#10; */&#10;function $MODULE$_entity_extra_field_info() {&#10;  $field_definitions = [&#10;    FirstClassname::class,&#10;    SecondClassname::class,&#10;  ];&#10;&#10;  $info_array = [];&#10;  foreach ($field_definitions as $field_definition) {&#10;    $info = \Drupal::classResolver()&#10;      -&gt;getInstanceFromDefinition($field_definition)&#10;      -&gt;info();&#10;    $info_array = array_merge_recursive($info_array, $info);&#10;  }&#10;&#10;  return $info_array;&#10;}&#10;&#10;/**&#10; * Implements hook_ENTITY_TYPE_view().&#10; */&#10;function $MODULE$_node_view(array &amp;$build, Drupal\Core\Entity\EntityInterface $entity, Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {&#10;  $field_definitions = [&#10;    FirstClassname::class,&#10;    SecondClassname::class,&#10;  ];&#10;&#10;  foreach ($field_definitions as $field_definition) {&#10;    \Drupal::classResolver()&#10;      -&gt;getInstanceFromDefinition($field_definition)&#10;      -&gt;view($build, $entity, $display, $view_mode);&#10;  }&#10;&#10;  return $build;&#10;}&#10;&#10;// @todo: create a Class in src/ExtraField, add &lt;?php to it and use extra_field_class in there." description="Creates a pseudo field the OO way" toReformat="false" toShortenFQNames="true">
+    <variable name="MODULE" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="extra_field_class" value="namespace Drupal\module_name\ExtraField;&#10;&#10;use Drupal\Core\Entity\Display\EntityViewDisplayInterface;&#10;use Drupal\Core\Entity\EntityInterface;&#10;&#10;/**&#10; * Provides the extra_field_name extra field.&#10; */&#10;class $CLASSNAME$ {&#10;&#10;  /**&#10;   * The name of the extra field.&#10;   */&#10;  const FIELD_NAME = 'field_name';&#10;&#10;  /**&#10;   * Method for module_name_entity_extra_field_info().&#10;   */&#10;  public function info() {&#10;    $extra = [];&#10;    $extra['node']['node_type']['display'][self::FIELD_NAME] = [&#10;      'label' =&gt; t('insert_label_here'),&#10;      'description' =&gt; t('insert_description_here'),&#10;      'visible' =&gt; FALSE,&#10;    ];&#10;    return $extra;&#10;  }&#10;&#10;  /**&#10;   * Method for module_name_node_view().&#10;   */&#10;  public function view(array &amp;$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {&#10;    if ($display-&gt;getComponent(self::FIELD_NAME)) {&#10;      $build[self::FIELD_NAME] = [&#10;        '#type' =&gt; 'markup',&#10;        '#markup' =&gt; 'This is my custom content',&#10;      ];&#10;    }&#10;  }&#10;&#10;}&#10;" description="Creates the class for the pseudo field" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASSNAME" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="menu_item_create" value="$items = array(&#10;  '1' =&gt; 'Menuitem_1',&#10;  '2' =&gt; 'Menuitem_2',&#10;  '3' =&gt; 'Menuitem_3'&#10;);&#10;&#10;foreach($items as $nid =&gt; $title) {&#10;  $menu_link = \Drupal\menu_link_content\Entity\MenuLinkContent:create([&#10;    'title' =&gt; $title,&#10;    'link' =&gt; ['uri' =&gt; 'internal:/node/' . $nid],&#10;    'menu_name' =&gt; 'main',&#10;    'expanded' =&gt; TRUE,&#10;  ]);&#10;  $menu_link-&gt;save();" description="Creates a menu item" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="import_content" value="/**&#10; * Import default content.&#10; */&#10;function $MODULE$_deploy_create_default_items() {&#10;  $files = [&#10;    'filename',&#10;  ];&#10;  foreach ($files as $file) {&#10;    $file_path = \Drupal::service('extension.list.module')-&gt;getPath('$MODULE$') . '/assets/' . $file . '.yml';&#10;    \Drupal::service('single_content_sync.importer')&#10;      -&gt;importFromFile($file_path);&#10;  }&#10;}" description="Import default content" toReformat="false" toShortenFQNames="true">
+    <variable name="MODULE" expression="substringBefore(fileNameWithoutExtension(),&quot;.&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="create_image" value="  $files = [&#10;    'filename.png' =&gt; 'File Name',&#10;  ];&#10;  foreach ($files as $file =&gt; $file_description) {&#10;    $file_data = file_get_contents(\Drupal::service('extension.list.module')-&gt;getPath('$MODULE$') . '/assets/images/' . $file);&#10;    $directory = 'public://';&#10;    \Drupal::service('file_system')&#10;      -&gt;prepareDirectory($directory, Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY);&#10;    $file = \Drupal::service('file.repository')-&gt;writeData($file_data, 'public://' . $file, Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);&#10;    $media = Drupal\media\Entity\Media::create([&#10;      'bundle' =&gt; 'image',&#10;      'uid' =&gt; 1,&#10;      'field_media_image' =&gt; [&#10;        'target_id' =&gt; $file-&gt;id(),&#10;        'alt' =&gt; 'Team',&#10;      ],&#10;    ]);&#10;&#10;    $media-&gt;setName($file_description)&#10;      -&gt;setPublished(TRUE)&#10;      -&gt;save();&#10;  }" description="Creates a media image item" toReformat="false" toShortenFQNames="true">
+    <variable name="MODULE" expression="substringBefore(fileNameWithoutExtension(),&quot;.&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="deploy_hook" value="/**&#10; * Deploy hook for $FUNCTIONDESCRIPTION$&#10; */&#10;function $MODULE$_deploy_$FUNCTION$() {&#10;  &#10;}" description="Creates a deploy hook" toReformat="false" toShortenFQNames="true">
+    <variable name="FUNCTIONDESCRIPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FUNCTION" expression="camelCase()" defaultValue="$FUNCTIONDESCRIPTION$" alwaysStopAt="true" />
+    <variable name="MODULE" expression="substringBefore(fileNameWithoutExtension(),&quot;.&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="twig_xdebug" value="{{ breakpoint() }}" description="Twig xdebug breakpoint" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="t_theme" value="[&#10;  '#theme' =&gt; 'links',&#10;  '#links' =&gt; $links,&#10;];" description="Render api theme" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+</templateSet>
