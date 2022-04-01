@@ -1,4 +1,4 @@
-# drupal-phpstorm-settings
+# PhpStorm live templates for Drupal 
 This repository includes live templates for PhpStorm specific for Drupal development.
 
 **Share your Favorite Settings**! This isn't meant to be a readonly repository. Have something you love about your PhpStorm setup? Create a pull request and share it.
