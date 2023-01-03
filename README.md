@@ -5,6 +5,7 @@ This repository includes live templates for PhpStorm specific for Drupal develop
 
 ## Installation
 1. Go to _PhpStorm Preferences | Tools | Settings Repository_
+1.1 Note: starting from phpstorm 2023, you'll have to install the plugin settings repository for this
 2. Add Read-only Source https://github.com/brentgees/phpstorm-live-templates-drupal
 3. Restart PhpStorm
 You can see and manage all the snippets under the Preferences | Editor | Live Templates
