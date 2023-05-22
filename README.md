@@ -250,7 +250,7 @@ class $CLASSNAME$ extends DsFieldBase {
 #### entity_query
 
 ```php
-$query = $this->entityTypeManager->getStorage('$ENTITY_TYPE$')->getQuery()
+$query = \Drupal::service('entity_type.manager')->getStorage('$ENTITY_TYPE$')->getQuery()
   ->condition('status', 1)
   ->sort('changed', 'DESC')
   ->range(0, 1)
@@ -338,9 +338,9 @@ function $MODULE$_entity_extra_field_info() {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_view().
+ * Implements hook_entity_view().
  */
-function $MODULE$_node_view(array &$build, Drupal\Core\Entity\EntityInterface $entity, Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+function $MODULE$_entity_view(array &$build, Drupal\Core\Entity\EntityInterface $entity, Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
   $field_definitions = [
     FirstClassname::class,
     SecondClassname::class,
@@ -365,27 +365,59 @@ Creates the class for the pseudo field
 ```php
 namespace Drupal\module_name\ExtraField;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 
 /**
  * Provides the extra_field_name extra field.
  */
-class $CLASSNAME$ {
+class $CLASSNAME$ implements ContainerInjectionInterface {
+
+  use StringTranslationTrait;
 
   /**
    * The name of the extra field.
    */
-  const FIELD_NAME = 'field_name';
+  protected const FIELD_NAME = 'field_name';
+
+  /**
+   * The block manager.
+   *
+   * @var \Drupal\Core\Block\BlockManagerInterface
+   */
+  protected BlockManagerInterface $blockManager;
+
+  /**
+   * ExtraFieldBase constructor.
+   *
+   * @param \Drupal\Core\Block\BlockManagerInterface $block_manager
+   *   The block manager.
+   */
+  public function __construct(BlockManagerInterface $block_manager) {
+    $this->blockManager = $block_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('plugin.manager.block'),
+    );
+  }
 
   /**
    * Method for module_name_entity_extra_field_info().
    */
-  public function info() {
+  public function info(): array {
     $extra = [];
     $extra['node']['node_type']['display'][self::FIELD_NAME] = [
-      'label' => t('insert_label_here'),
-      'description' => t('insert_description_here'),
+      'label' => $this->t('insert_label_here'),
+      'description' => $this->t('insert_description_here'),
       'visible' => FALSE,
     ];
     return $extra;
@@ -394,7 +426,7 @@ class $CLASSNAME$ {
   /**
    * Method for module_name_node_view().
    */
-  public function view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  public function view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode): void {
     if ($display->getComponent(self::FIELD_NAME)) {
       $build[self::FIELD_NAME] = [
         '#type' => 'markup',
@@ -508,6 +540,41 @@ Render api theme
   '#links' => $links,
 ];
 ```
+
+#### create_node
+
+Creates a Node
+
+```php
+  $node = Drupal\node\Entity\Node::create(['type' => 'content_type']);
+  $node->set('langcode', 'en');
+  $node->set('uid', 1);
+  $node->set('title', 'title');
+  $node->set('body', $body);
+  $node->set('field_1', $field_1);
+  $node->save();
+
+  // We get the nid from the node.
+  $nid = $node->id();
+
+  // We also translate the node.
+  $translated_node = Drupal\node\Entity\Node::load($nid);
+  $translated_node = $translated_node->addTranslation("nl");
+  $translated_node->set('title', $title_EN);
+  $translated_node->save();
+```
+
+#### load_block
+
+Loads a block
+
+```php
+$block_manager = \Drupal::service('plugin.manager.block');
+$config = [];
+$plugin_block = $block_manager->createInstance('block_name', $config);
+$output = $plugin_block->build();
+```
+
 
 
 
